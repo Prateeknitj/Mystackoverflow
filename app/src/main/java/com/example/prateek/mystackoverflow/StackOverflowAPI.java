@@ -1,7 +1,5 @@
 package com.example.prateek.mystackoverflow;
 
-
-
 import com.example.prateek.mystackoverflow.models.Answer;
 import com.example.prateek.mystackoverflow.models.Badges;
 import com.example.prateek.mystackoverflow.models.Comment;
@@ -17,7 +15,7 @@ import retrofit2.http.Query;
 
 public interface StackOverflowAPI {
     // Questions
-    @GET("questions?order=desc&sort=votes&site=stackoverflow&filter=!9YdnSIN18")
+    @GET("questions?order=desc&sort=votes&site=stackoverflow&pagesize=20&filter=!9YdnSIN18")
     Call<Items<Question>> loadAllQuestions(@Query("sort") String sort);
 
     @GET("questions?order=desc&site=stackoverflow&filter=!-*f(6rc.lFba")
@@ -59,6 +57,6 @@ public interface StackOverflowAPI {
     @GET("badges?order=desc&sort=rank&site=stackoverflow")
     Call<Items<Badges>> loadBadges();
 
-    @GET("search?order=desc&sort=votes&site=stackoverflow&filter=!-*f(6rc.lFba")
+    @GET("search?order=desc&sort=votes&site=stackoverflow&pagesize=20&filter=!-*f(6rc.lFba")
     Call<Items<Question>> loadSearchQuestions(@Query("intitle") String intitle);
 }
