@@ -8,5 +8,12 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"/>
 
+    <ProgressBar
+        android:id="@+id/pbLoading"
+        android:textAlignment="center"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 
 </RelativeLayout>

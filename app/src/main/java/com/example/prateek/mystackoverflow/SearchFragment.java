@@ -28,7 +28,7 @@ public class SearchFragment extends Fragment implements Callback<Items<Question>
     HomeAdapter adapter;
     RecyclerView.LayoutManager layoutManager;
     Items<Question> questionList = new Items<>();
-
+    ProgressBar pbLoading;
     EditText etSearch;
     Call<Items<Question>> call;
 
@@ -45,6 +45,7 @@ public class SearchFragment extends Fragment implements Callback<Items<Question>
 
         ButterKnife.bind(this, view);
 
+        pbLoading=(ProgressBar) view.findViewById(R.id.pbLoading);
         etSearch=(EditText) view.findViewById(R.id.etSearch);
         rvSearch=(RecyclerView) view.findViewById(R.id.rvSearch);
         rvSearch.setHasFixedSize(true);
@@ -64,7 +65,7 @@ public class SearchFragment extends Fragment implements Callback<Items<Question>
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (etSearch.getText().toString().length() > 2) {
-
+                    pbLoading.setVisibility(View.VISIBLE);
                     StackOverflowLoader stackOverflowLoader = new StackOverflowLoader();
                     call = stackOverflowLoader.loadSearchQuestions(etSearch.getText().toString());
                     call.enqueue(SearchFragment.this);
@@ -96,6 +97,7 @@ public class SearchFragment extends Fragment implements Callback<Items<Question>
         adapter.clearQuestionList();
         adapter.setQuestionList(response.body());
         adapter.notifyDataSetChanged();
+        pbLoading.setVisibility(View.GONE);
     }
 
     @Override

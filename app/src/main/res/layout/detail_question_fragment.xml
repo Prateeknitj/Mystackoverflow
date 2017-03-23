@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:id="@+id/fragment_container"
     android:scrollbars="none"
     >
 <LinearLayout
@@ -43,6 +44,12 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"/>
 
+    <ProgressBar
+        android:id="@+id/pbLoading"
+        android:textAlignment="center"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>
 </ScrollView>

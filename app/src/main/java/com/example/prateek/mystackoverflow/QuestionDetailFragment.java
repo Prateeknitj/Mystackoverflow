@@ -1,8 +1,11 @@
 package com.example.prateek.mystackoverflow;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -11,6 +14,8 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.example.prateek.mystackoverflow.models.Answer;
 import com.example.prateek.mystackoverflow.models.Items;
@@ -31,8 +36,8 @@ public class QuestionDetailFragment extends Fragment implements Callback<Items<A
     TextView tvTitle;
     RecyclerView rvAswers;
     TextView tvBody;
-
-
+    static int pgcount;
+    ProgressBar pbLoading;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,20 +53,20 @@ public class QuestionDetailFragment extends Fragment implements Callback<Items<A
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.detail_question_fragment,
                 container, false);
 
         ButterKnife.bind(this, view);
-
         tvTitle=(TextView) view.findViewById(R.id.tvTitle);
         tvBody=(TextView) view.findViewById(R.id.tvBody);
         rvAswers=(RecyclerView) view.findViewById(R.id.rvAswers);
+        pbLoading=(ProgressBar) view.findViewById(R.id.pbLoading);
+        pbLoading.setVisibility(View.VISIBLE);
         tvTitle.setText(Html.fromHtml(title));
         tvBody.setText(Html.fromHtml(body));
-
+        pgcount=1;
         rvAswers.setHasFixedSize(true);
-
         layoutManager = new LinearLayoutManager(getActivity());
         rvAswers.setLayoutManager(layoutManager);
 
@@ -79,6 +84,7 @@ public class QuestionDetailFragment extends Fragment implements Callback<Items<A
     public void onResponse(Call<Items<Answer>> call, Response<Items<Answer>> response) {
         adapter.setAnswerItems(response.body());
         adapter.notifyDataSetChanged();
+        pbLoading.setVisibility(View.GONE);
     }
 
     @Override

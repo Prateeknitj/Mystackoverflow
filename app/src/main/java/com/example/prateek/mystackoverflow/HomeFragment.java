@@ -11,6 +11,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+
 import com.example.prateek.mystackoverflow.models.Items;
 import com.example.prateek.mystackoverflow.models.Question;
 import butterknife.ButterKnife;
@@ -25,7 +27,7 @@ public class HomeFragment extends Fragment implements Callback<Items<Question>> 
     HomeAdapter adapter;
     RecyclerView.LayoutManager layoutManager;
     Items<Question> questionList = new Items<>();
-
+    ProgressBar pbLoading;
 
     Call<Items<Question>> callWOFilter, call;
 
@@ -43,6 +45,8 @@ public class HomeFragment extends Fragment implements Callback<Items<Question>> 
                 container, false);
 
         ButterKnife.bind(this, view);
+        pbLoading=(ProgressBar) view.findViewById(R.id.pbLoading);
+        pbLoading.setVisibility(View.VISIBLE);
         rvHome=(RecyclerView) view.findViewById(R.id.rvHome);
         rvHome.setHasFixedSize(true);
 
@@ -55,7 +59,6 @@ public class HomeFragment extends Fragment implements Callback<Items<Question>> 
         StackOverflowLoader stackOverflowLoader = new StackOverflowLoader();
         callWOFilter = stackOverflowLoader.loadAllQuestions("votes");
         callWOFilter.enqueue(this);
-
         return view;
     }
 
@@ -73,6 +76,7 @@ public class HomeFragment extends Fragment implements Callback<Items<Question>> 
         adapter.clearQuestionList();
         adapter.setQuestionList(response.body());
         adapter.notifyDataSetChanged();
+        pbLoading.setVisibility(View.GONE);
     }
 
     @Override
