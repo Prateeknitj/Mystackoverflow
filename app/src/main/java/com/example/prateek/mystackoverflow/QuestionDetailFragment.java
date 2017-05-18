@@ -80,6 +80,7 @@ public class QuestionDetailFragment extends Fragment implements Callback<Items<A
         return view;
     }
 
+
     @Override
     public void onResponse(Call<Items<Answer>> call, Response<Items<Answer>> response) {
         adapter.setAnswerItems(response.body());
