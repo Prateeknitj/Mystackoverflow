@@ -65,44 +65,4 @@ public class mydata {
 	public void setUsera(String usera) {
 		this.usera = usera;
 	}
-
-	public int getQiad() {
-		return qiad;
-	}
-
-	public void setQiad(int qiad) {
-		this.qiad = qiad;
-	}
-
-	public int getVotea() {
-		return votea;
-	}
-
-	public void setVotea(int votea) {
-		this.votea = votea;
-	}
-
-	public int getGbadge() {
-		return gbadge;
-	}
-
-	public void setGbadge(int gbadge) {
-		this.gbadge = gbadge;
-	}
-
-	public int getSbadge() {
-		return sbadge;
-	}
-
-	public void setSbadge(int sbadge) {
-		this.sbadge = sbadge;
-	}
-
-	public int getBbadge() {
-		return bbadge;
-	}
-
-	public void setBbadge(int bbadge) {
-		this.bbadge = bbadge;
-	}
 }
